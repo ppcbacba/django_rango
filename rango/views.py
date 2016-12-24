@@ -1,4 +1,3 @@
-from django.http import HttpResponse
 from django.shortcuts import render
 
 
@@ -8,4 +7,5 @@ def index(request):
 
 
 def about(request):
-    return HttpResponse("Rango says this is about page<br /><a href='/rango/'>home</a>")
+    context_dict = {'zcl': "copyright:张成龙"}
+    return render(request, 'rango/about.html', context=context_dict)
