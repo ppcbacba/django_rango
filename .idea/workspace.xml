@@ -2,6 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="178eb602-3d9f-4d43-9153-ab5035f798f7" name="Default" comment="admin finished">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/rango/migrations/0001_initial.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/rango/migrations/0002_category_slug.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/rango/migrations/0003_auto_20161228_1742.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/rango/migrations/__init__.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/django_rango.iml" afterPath="$PROJECT_DIR$/.idea/django_rango.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
     </list>
