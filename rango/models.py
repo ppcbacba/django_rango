@@ -1,10 +1,19 @@
+from django.contrib.auth.models import User
 from django.db import models
 from django.template.defaultfilters import slugify
 
 
-class Category(models.Model):
+class UserProfile(models.Model):
+    user = models.OneToOneField(User)
+    website = models.URLField(blank=True)
+    picture = models.ImageField(upload_to='priflie_images', blank=True)
 
-    maxlength=128
+    def __str__(self):
+        return self.user.username
+
+
+class Category(models.Model):
+    maxlength = 128
     name = models.CharField(max_length=maxlength, unique=True)
     views = models.IntegerField(default=0)
     likes = models.IntegerField(default=0)
@@ -22,7 +31,7 @@ class Category(models.Model):
 
 
 class Page(models.Model):
-    maxlength=128
+    maxlength = 128
     category = models.ForeignKey(Category)
     title = models.CharField(max_length=maxlength)
     url = models.URLField()
