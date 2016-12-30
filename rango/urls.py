@@ -26,5 +26,9 @@ urlpatterns = [
 
     url(r'^category/(?P<category_name_slug>[\w\-]+)/$',
         views.show_category,
-        name='show_category')
+        name='show_category'),
+
+    url(r'login/$',
+        views.user_login,
+        name='login'),
 ]
