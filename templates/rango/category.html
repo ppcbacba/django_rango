@@ -1,14 +1,11 @@
-<!DOCTYPE html>
+{% extends 'rango/base.html' %}
 {% load staticfiles %}
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Rango</title>
-    <link rel="stylesheet" href="{% static "css/bootstrap.min.css" %}"/>
-    <script src="{% static "js/jquery.min.js" %}"></script>
-</head>
-<body>
-<div>
+
+{% block title_block %}
+{{ category.name }}
+{% endblock %}
+
+{% block body_block %}
     {% if category %}
         <h1>{{ category.name }}</h1>
         {% if pages %}
@@ -20,9 +17,8 @@
         {% else %}
             <strong>No pages currently in category.</strong>
         {% endif %}
+        <a href="{% url 'rango:add_page' category.slug %}">Add Page</a><br />
     {% else %}
         The specified category does not exist!
     {% endif %}
-</div>
-</body>
-</html>
+{% endblock %}
