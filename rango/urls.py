@@ -1,5 +1,5 @@
 from django.conf.urls import url
-
+from django.contrib.auth.views import logout
 from rango import views
 
 app_name = 'rango'
@@ -31,4 +31,13 @@ urlpatterns = [
     url(r'login/$',
         views.user_login,
         name='login'),
+
+    url(r'restricted/',
+        views.restricted,
+        name='restricted'),
+
+    url(r'logout/$',
+        views.user_logout,
+        name='logout'),
+    # url(r'^logout/$', 'django.contrib.auth.views.logout', {'next_page': '/'}, name='logout'),
 ]

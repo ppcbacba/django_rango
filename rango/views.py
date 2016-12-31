@@ -1,4 +1,5 @@
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
@@ -116,7 +117,7 @@ def register(request):
 
             # Update our variable to indicate that template
             # registration wes successful
-            register = True
+            registered= True
         else:
             # Invalid form or forms -mistakes or something else?
             # Print problems to the terminal
@@ -175,3 +176,16 @@ def user_login(request):
             # This scenario would most likely be a HTTP GET
     else:
         return render(request, 'rango/login.html', {})
+
+@login_required
+def restricted(request):
+    return HttpResponse("Since you're logged in ,you can see this text")
+
+# Use the login_required() decorator to ensure only hose logged in can access the vies
+@login_required
+def user_logout(request):
+#     Since we know the user is logged in,we cann now just log them out
+    logout(request)
+    # print(HttpResponseRedirect(reverse('index')))
+    #Take the user back to the homepage
+    return  HttpResponseRedirect(reverse('rango:index'))
