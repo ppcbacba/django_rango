@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
@@ -15,14 +17,24 @@ def index(request):
     catetory_list = Category.objects.order_by('-likes')[:5]
     pages_list = Page.objects.order_by('-views')[:5]
     context_dict = {'categories': catetory_list, 'pages': pages_list}
-    return render(request, 'rango/index.html', context=context_dict)
+    response=render(request,'rango/index.html',context_dict)
+    visitor_cookie_handler(request,response)
+    return response
+
+def visitor_cookie_handler(request,response):
+    visits=int(request.COOKIES.get('visits','1'))
+    last_visit_cookie=request.COOKIES.get('last_visit',str(datetime.now()))
+
+    last_visit_time=datetime.strptime(last_visit_cookie[:-7],'%Y-%m-%d %H:%M:%S')
+    if(datetime.now()-last_visit_time).seconds>5:
+        visits+=1
+        response.set_cookie('last_visit',str(datetime.now()))
+    else:
+        response.set_cookie('last_visit',last_visit_cookie)
+
+    response.set_cookie('visits',visits)
 
 
-# def show_categories(request):
-#     context_dict = {}
-#     categories = Category.objects.all()
-#     context_dict['categories'] = categories
-#     return render(request, 'rango/show_categories.html', context_dict)
 def show_category(request, category_name_slug):
     context_dict = {}
     try:
@@ -71,6 +83,9 @@ def add_page(request, category_name_slug):
 
 
 def about(request):
+    if request.session.test_cookie_worked():
+        print("Test Cookie Worked!")
+        request.session.delete_test_cookie()
     context_dict = {'zcl': "copyright:张成龙"}
     return render(request, 'rango/about.html', context=context_dict)
 
