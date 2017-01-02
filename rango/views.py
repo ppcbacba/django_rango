@@ -18,22 +18,28 @@ def index(request):
     pages_list = Page.objects.order_by('-views')[:5]
     context_dict = {'categories': catetory_list, 'pages': pages_list}
     response=render(request,'rango/index.html',context_dict)
-    visitor_cookie_handler(request,response)
+    visitor_cookie_handler(request)
+    context_dict['visits']=request.session['visits']
     return response
 
-def visitor_cookie_handler(request,response):
-    visits=int(request.COOKIES.get('visits','1'))
-    last_visit_cookie=request.COOKIES.get('last_visit',str(datetime.now()))
+def get_server_side_cookie(request,cookie,default_value=None):
+    val=request.session.get(cookie)
+    if not val:
+        val=default_value
+    return val
+def visitor_cookie_handler(request):
+    visits=int(get_server_side_cookie(request,'visits','1'))
+    last_visit_cookie=get_server_side_cookie(request,'last_visit',str(datetime.now()))
 
     last_visit_time=datetime.strptime(last_visit_cookie[:-7],'%Y-%m-%d %H:%M:%S')
-    if(datetime.now()-last_visit_time).seconds>5:
+    if(datetime.now()-last_visit_time).seconds>=5:
         visits+=1
-        response.set_cookie('last_visit',str(datetime.now()))
+        request.session['last_visit']=str(datetime.now())
     else:
-        response.set_cookie('last_visit',last_visit_cookie)
+        visits=1
+        request.session['last_visit']=last_visit_cookie
 
-    response.set_cookie('visits',visits)
-
+    request.session['visits']=visits
 
 def show_category(request, category_name_slug):
     context_dict = {}
@@ -83,10 +89,10 @@ def add_page(request, category_name_slug):
 
 
 def about(request):
-    if request.session.test_cookie_worked():
-        print("Test Cookie Worked!")
-        request.session.delete_test_cookie()
+    visitor_cookie_handler(request)
+
     context_dict = {'zcl': "copyright:张成龙"}
+    context_dict['visits']=request.session['visits']
     return render(request, 'rango/about.html', context=context_dict)
 
 
@@ -143,7 +149,6 @@ def register(request):
         # These form will be blank,ready for user input
         user_form = UserForm()
         profile_form = UserProfileForm()
-
     # Render the template depending ot the context
     return render(request,
                   'rango/register.html',
