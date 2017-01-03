@@ -35,7 +35,7 @@ def visitor_cookie_handler(request):
         visits += 1
         request.session['last_visit'] = str(datetime.now())
     else:
-        visits = 1
+        visits = visits
         request.session['last_visit'] = last_visit_cookie
 
     request.session['visits'] = visits
