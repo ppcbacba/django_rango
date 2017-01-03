@@ -1,0 +1,270 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en" dir="ltr">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="prev" href="/d/content/django-18-tutorial-4" />
+<link rel="up" href="/d/content/django-18-tutorial" />
+<link rel="next" href="/d/content/django-18-tutorial-51-alternative-authentication-make-your-own" />
+<link rel="shortcut icon" href="/d/misc/favicon.ico" type="image/x-icon" />
+ <title>Django 1.8 Tutorial - 5. Django Registration Redux | a computer hobbyist's notebook</title>
+<link type="text/css" rel="stylesheet" media="all" href="/d/modules/book/book.css?p" />
+<link type="text/css" rel="stylesheet" media="all" href="/d/modules/node/node.css?p" />
+<link type="text/css" rel="stylesheet" media="all" href="/d/modules/system/defaults.css?p" />
+<link type="text/css" rel="stylesheet" media="all" href="/d/modules/system/system.css?p" />
+<link type="text/css" rel="stylesheet" media="all" href="/d/modules/system/system-menus.css?p" />
+<link type="text/css" rel="stylesheet" media="all" href="/d/modules/user/user.css?p" />
+<link type="text/css" rel="stylesheet" media="all" href="/d/modules/comment/comment.css?p" />
+<link type="text/css" rel="stylesheet" media="all" href="/d/themes/chameleon/marvin2/style.css?p" />
+<link type="text/css" rel="stylesheet" media="all" href="/d/themes/chameleon/common.css?p" />
+<script type="text/javascript" src="/d/misc/jquery.js?p"></script>
+<script type="text/javascript" src="/d/misc/drupal.js?p"></script>
+<script type="text/javascript" src="/d/misc/tableheader.js?p"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+jQuery.extend(Drupal.settings, { "basePath": "/d/" });
+//--><!]]>
+</script>
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/default.min.css"><script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/highlight.min.js"></script><script>hljs.initHighlightingOnLoad();</script></head><body>
+ <div id="header">  <a href="/d/" title="Home"><img src="/d/files/marvin2_logo.png" alt="Home" /></a></div>
+ <div class="navlinks"><ul class="links" id="navlist"><li class="menu-573 first"><a href="http://riceball.com/" title="Escape the drupal blog and visit the rest of the site.">sitewide home</a></li>
+<li class="menu-1"><a href="http://riceball.com/d/" title="">blog home</a></li>
+<li class="menu-1018 last"><a href="/d/search" title="">search</a></li>
+</ul> </div>
+ <table id="content">
+  <tr>
+   <td id="sidebar-left"><div id="block-search-0" class="block block-search">
+
+  <div class="content">
+    <form action="/d/content/django-18-tutorial-5-django-registration-redux"  accept-charset="UTF-8" method="post" id="search-block-form">
+<div><div class="container-inline">
+  <div class="form-item" id="edit-search-block-form-1-wrapper">
+ <label for="edit-search-block-form-1">Search this site: </label>
+ <input type="text" maxlength="128" name="search_block_form" id="edit-search-block-form-1" size="15" value="" title="Enter the terms you wish to search for." class="form-text" />
+</div>
+<input type="submit" name="op" id="edit-submit" value="Search"  class="form-submit" />
+<input type="hidden" name="form_build_id" id="form-aVH2uwwzFT7sKGlNuRA9x_zThyDLDKiFyilVZo2GSV8" value="form-aVH2uwwzFT7sKGlNuRA9x_zThyDLDKiFyilVZo2GSV8"  />
+<input type="hidden" name="form_id" id="edit-search-block-form" value="search_block_form"  />
+</div>
+
+</div></form>
+  </div>
+</div>
+<div id="block-user-0" class="block block-user">
+  <h2>User login</h2>
+
+  <div class="content">
+    <form action="/d/content/django-18-tutorial-5-django-registration-redux?destination=node%2F1433"  accept-charset="UTF-8" method="post" id="user-login-form">
+<div><div class="form-item" id="edit-name-wrapper">
+ <label for="edit-name">Username: <span class="form-required" title="This field is required.">*</span></label>
+ <input type="text" maxlength="60" name="name" id="edit-name" size="15" value="" class="form-text required" />
+</div>
+<div class="form-item" id="edit-pass-wrapper">
+ <label for="edit-pass">Password: <span class="form-required" title="This field is required.">*</span></label>
+ <input type="password" name="pass" id="edit-pass"  maxlength="60"  size="15"  class="form-text required" />
+</div>
+<input type="submit" name="op" id="edit-submit-1" value="Log in"  class="form-submit" />
+<div class="item-list"><ul><li class="first last"><a href="/d/user/password" title="Request new password via e-mail.">Request new password</a></li>
+</ul></div><input type="hidden" name="form_build_id" id="form-Bl4dhBf_auN-y0YKFGpIkCbzoBy6o8AWFkimNExUf5U" value="form-Bl4dhBf_auN-y0YKFGpIkCbzoBy6o8AWFkimNExUf5U"  />
+<input type="hidden" name="form_id" id="edit-user-login-block" value="user_login_block"  />
+
+</div></form>
+  </div>
+</div>
+<div id="block-user-1" class="block block-user">
+  <h2>Navigation</h2>
+
+  <div class="content">
+    <ul class="menu"><li class="leaf first"><a href="/d/contact">Contact</a></li>
+<li class="leaf last"><a href="/d/tracker">Recent posts</a></li>
+</ul>  </div>
+</div>
+<div id="block-blog-0" class="block block-blog">
+  <h2>Recent blog posts</h2>
+
+  <div class="content">
+    <div class="item-list"><ul><li class="first"><a href="/d/node/1532">Greasemonkey/Tampermoney Ebay Seller Script to Filter Active LIstings</a></li>
+<li><a href="/d/node/1529">I was wrong again</a></li>
+<li><a href="/d/node/1527">wp.media Tutorials, and wp.Backbone.Subviews</a></li>
+<li><a href="/d/content/wp-media-states-frames">WP Media UI: States, StateMachine, and Frame</a></li>
+<li><a href="/d/node/1525">Reversing the Cloud</a></li>
+<li><a href="/d/node/1521">Re: Destructured Objects as Parameters</a></li>
+<li><a href="/d/node/1520">Learning About Kindle Publishing</a></li>
+<li><a href="/d/content/headline-experiment">Boost Your Click Through Traffic with Just One Tip (Headlines)</a></li>
+<li><a href="/d/node/1519">Faster Mobile Web Apps with Offline-First</a></li>
+<li class="last"><a href="/d/content/css-overview-for-software-developers">What Many Other Books Don&#039;t Tell You about CSS</a></li>
+</ul></div><div class="more-link"><a href="/d/blog" title="Read the latest blog entries.">more</a></div>  </div>
+</div>
+<div id="block-block-1" class="block block-block">
+  <h2>Links</h2>
+
+  <div class="content">
+    T: <a href="https://twitter.com/johnkawakami">@johnkawakami</a><br />
+F: <a href="http://facebook.com/geekout">geekout</a><br />
+GitHub: <a href="http://github.com/johnkawakami">johnkawakami</a><br />
+L: <a href="https://www.linkedin.com/in/john-kawakami-0146534">john-kawakami</a><br />
+Amazon: <a href="https://www.amazon.com/s/ref=nb_sb_noss?url=search-alias%3Ddigital-text&field-keywords=John+Kawakami&rh=n%3A133140011%2Ck%3AJohn+Kawakami">ebook publishing</a><br />
+<div class="item-list"><ul>
+<li><a href="http://sign-in-sheet.com/">Sign-in Sheet</a></li>
+<li><a href=http://chanfles.com/blog/>Chanfles!</a></li>
+<li><a href=http://sicklyseason.com/>sickly season</a></li>
+<li><a href="http://nocturnalnostalgia.com/">Nocturnal Nostalgia</a></li>
+<li><a href="http://la.indymedia.org/">LA Indymedia</a></li>
+<li><a href="http://www.brightfuturejobs.com/">Bright Future Jobs</a></li>
+</ul>
+</div>  </div>
+</div>
+<div id="block-node-0" class="block block-node">
+  <h2>Syndicate</h2>
+
+  <div class="content">
+    <a href="/d/node/feed" class="feed-icon"><img src="/d/misc/feed.png" alt="Syndicate content" title="Syndicate" width="16" height="16" /></a>  </div>
+</div>
+</td>
+   <td id="main">
+<div class="breadcrumb"><a href="/d/">Home</a> » <a href="/d/content/novices-notebook">Novice&#039;s Notebook</a> » <a href="/d/content/django-18-tutorial">Django 1.8 Tutorial</a></div><h2>Django 1.8 Tutorial - 5. Django Registration Redux</h2>
+<!-- begin content -->
+<div class="node">
+ <div class="content">
+<p>This text is a work in progress.  I'm not even done with this part myself.</p>
+<p>In doing some digging, I found out that the leading registration app, django-registration, was abandoned. Some time later, django-registration-redux picked up the ball and has maintained it.  There's also another alternative django-allauth, which does registration and integrates with social sites.</p>
+<p>The instructions for django-registration-redux are pretty good.  Just read through them, and consider this tutorial just a slight gloss of what's covered, plus some specifics about our demo app.</p>
+<p>First, add 'registration' to the apps, and define ACCOUNT_ACTIVATION_DAYS and REGISTRATION_AUTO_LOGIN.</p>
+<p>Registration includes some urlpatterns from the django auth.  You should put the registration urls before the django auth urls.</p>
+<pre>
+    url(r'^accounts/', include('registration.backends.default.urls')),
+    url(r'^accounts/', include('django.contrib.auth.urls')),
+</pre><p>
+When you order them like this, the registration urls will be handled first, then the default auth will capture the old URLs.</p>
+<p>Though the old urls and the new ones can co-exist, it'll just confuse people when there are multiple login and logouts.  It also confuses developers, so you should fix things to prefer the new urls.</p>
+<p>The names of the old urls in registration are different - they start with "auth_", so "login" is now "auth_login". "logout" is now "auth_logout", and so forth.  Here's the list:</p>
+<pre>
+^accounts/ ^activate/complete/$ [name='registration_activation_complete']
+^accounts/ ^activate/(?P&lt;activation_key&gt;\w+)/$ [name='registration_activate']
+^accounts/ ^register/complete/$ [name='registration_complete']
+^accounts/ ^register/closed/$ [name='registration_disallowed']
+^accounts/ ^register/$ [name='registration_register']
+^accounts/ ^login/$ [name='auth_login']
+^accounts/ ^logout/$ [name='auth_logout']
+^accounts/ ^password/change/$ [name='auth_password_change']
+^accounts/ ^password/change/done/$ [name='auth_password_change_done']
+^accounts/ ^password/reset/$ [name='auth_password_reset']
+^accounts/ ^password/reset/complete/$ [name='auth_password_reset_complete']
+^accounts/ ^password/reset/done/$ [name='auth_password_reset_done']
+^accounts/ ^password/reset/confirm/(?P&lt;uidb64&gt;[0-9A-Za-z_\-]+)/(?P&lt;token&gt;.+)/$ [name='auth_password_reset_confirm']
+</pre><p>
+You'll need to update your templates to reflect this change.  </p>
+<p>Just look for login, logout, password_reset, password_change, and fix them.  (If you're on Unix, you can use grep.)</p>
+<p>I had to change comment_list.html, login.html, logged_out.html, password_reset_email.html, password_reset_email_html.html.</p>
+<p>You must also alter the URL config in the urls.py file that enables the HTML email for password resets, so it overrides the new password changing URL and has the name "auth_password_reset".</p>
+<pre>
+   url(r'^accounts/password/reset/$',
+        password_reset,
+        {'html_email_template_name':
+            'registration/password_reset_email_html.html'},
+        name='auth_password_reset',
+        ),
+</pre><p>
+At this point, the system should function, except there's no registration.  You need to make the following templates.  See the docs for details about what variables are defined in the context.</p>
+<pre>
+registration/registration_form.html
+registration/registration_complete.html
+registration/activate.html
+registration/activation_complete.html
+registration/activation_email_subject.txt
+registration/activation_email.txt
+registration/activation_email.html
+</pre><p>
+These are all in the tgz file.</p>
+<p>If you'd rather start from scratch, here's a command to create the files.</p>
+<pre>cd templates; cd registration; touch registration_form.html registration_complete.html activate.html activation_complete.html activation_email_subject.txt activation_email.txt activation_email.html</pre><p>
+You can also find templates on Github and in some packages.</p>
+<p><b>A small modification</b><br />
+A view with a few links was added to the root of the site.  This is to make it easier to test the registration features.</p>
+<p><b>Allauth</b><br />
+I'm going to do Allauth soon, but not yet.  It's a bit more involved than this.</p>
+<table id="attachments" class="sticky-enabled">
+ <thead><tr><th>Attachment</th><th>Size</th> </tr></thead>
+<tbody>
+ <tr class="odd"><td><a href="http://riceball.com/d/files/minimal5.tgz">minimal5.tgz</a></td><td>16.74 KB</td> </tr>
+</tbody>
+</table>
+  <div id="book-navigation-428" class="book-navigation">
+
+        <div class="page-links clear-block">
+              <a href="/d/content/django-18-tutorial-4" class="page-previous" title="Go to previous page">‹ Django 1.8 Tutorial - 4. Integrating the Default Login Screens, Adding HTML Email</a>
+                    <a href="/d/content/django-18-tutorial" class="page-up" title="Go to parent page">up</a>
+                    <a href="/d/content/django-18-tutorial-51-alternative-authentication-make-your-own" class="page-next" title="Go to next page">Django 1.8 Tutorial - 5.1 Alternative Authentication (Make Your Own) ›</a>
+          </div>
+
+  </div>
+ </div>
+<div class="links"><ul class="links inline"><li class="node_submitted first"><span>By John Kawakami at Jun 7 2015 - 14:02</span></li>
+<li class="taxonomy_term_96"><a href="/d/category/information-topics/technology/computer-programming" rel="tag" title="Yes, a bit specific, but I need to store some links!">Computer Programming</a></li>
+<li class="taxonomy_term_102"><a href="/d/taxonomy/term/102" rel="tag" title="">Python</a></li>
+<li class="comment_add last"><a href="/d/comment/reply/1433#comment-form" title="Share your thoughts and opinions related to this posting.">Add new comment</a></li>
+</ul></div>
+</div>
+   <div id="sidebar-content"><div id="block-block-2" class="block block-block">
+  <h2>.</h2>
+
+  <div class="content">
+    <div style="text-align: center">
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- content footer rb -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-0545194040495488"
+     data-ad-slot="7716499935"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ <script type="text/javascript">
+(function() {
+  var ARTICLE_URL = window.location.href;
+  var CONTENT_ID = 'everything';
+  document.write(
+    '<scr'+'ipt '+
+    'src="//survey.g.doubleclick.net/survey?site=_wv4m74euspjxqybjxqljjzrcvy'+
+    '&amp;url='+encodeURIComponent(ARTICLE_URL)+
+    (CONTENT_ID ? '&amp;cid='+encodeURIComponent(CONTENT_ID) : '')+
+    '&amp;random='+(new Date).getTime()+
+    '" type="text/javascript">'+'\x3C/scr'+'ipt>');
+})();
+</script>
+<script type="text/javascript">
+  try { _402_Show(); } catch(e) {}
+</script>
+</div>  </div>
+</div>
+<div id="block-block-10" class="block block-block">
+
+  <div class="content">
+    <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-6577692-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+<script type="text/javascript" src="http://edge.quantserve.com/quant.js"></script>
+<noscript>
+<img src="http://pixel.quantserve.com/pixel/p-ab5TvWIzYC0z2.gif" style="display: none;" border="0" height="1" width="1" alt="Quantcast"/>
+</noscript>
+  </div>
+</div>
+</div>
+
+<!-- end content -->
+   </td>
+  </tr>
+ </table>
+ </body>
+</html>

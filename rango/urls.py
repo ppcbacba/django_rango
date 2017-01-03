@@ -1,5 +1,5 @@
 from django.conf.urls import url
-from django.contrib.auth.views import logout
+
 from rango import views
 
 app_name = 'rango'
@@ -12,9 +12,9 @@ urlpatterns = [
         views.about,
         name='about'),
 
-    url(r'^register/$',
-        views.register,
-        name='register'),
+    # url(r'^register/$',
+    #     views.register,
+    #     name='register'),
 
     url(r'^add_category/$',
         views.add_category,
@@ -28,16 +28,16 @@ urlpatterns = [
         views.show_category,
         name='show_category'),
 
-    url(r'login/$',
-        views.user_login,
-        name='login'),
+    # url(r'login/$',
+    #     views.user_login,
+    #     name='login'),
 
     url(r'restricted/',
         views.restricted,
         name='restricted'),
 
-    url(r'logout/$',
-        views.user_logout,
-        name='logout'),
+    # url(r'logout/$',
+    #     views.user_logout,
+    #     name='logout'),
     # url(r'^logout/$', 'django.contrib.auth.views.logout', {'next_page': '/'}, name='logout'),
 ]
