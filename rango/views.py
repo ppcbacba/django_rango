@@ -1,6 +1,5 @@
 from datetime import datetime
 
-from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import render
 
@@ -97,8 +96,10 @@ def about(request):
     return render(request, 'rango/about.html', context=context_dict)
 
 
+def search(request):
+    pass
+    return None
 
-@login_required
+
 def restricted(request):
     return HttpResponse("Since you're logged in ,you can see this text")
-

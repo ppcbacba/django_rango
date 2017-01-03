@@ -11,6 +11,9 @@ urlpatterns = [
     url(r'about/$',
         views.about,
         name='about'),
+    url(r'^search',
+        views.search,
+        name='search'),
 
     # url(r'^register/$',
     #     views.register,

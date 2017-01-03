@@ -6,46 +6,48 @@
 {% endblock %}
 
 {% block body_block %}
-    <h1>Rango says...</h1>
-    <div>
+    <div class="jumbotron">
+        <h1 class="display-3">Rango says...</h1>
         {% if user.is_authenticated %}
-            hody {{ user.username }}
+            <h1>hey there {{ user.username }}!</h1>
         {% else %}
-            hey there partner
+            <h1>hey there partner</h1>
         {% endif %}
     </div>
-    <div>
-        <div><h2>Most Liked Categories</h2></div>
-        {% if categories %}
-            <ul>
-                {% for category in categories %}
-                    <li>
-                        <a href="{% url 'rango:show_category' category.slug %}">{{ category.name }}</a><strong
-                            color="aqua"> {{ category.views }}</strong></li>
-                {% endfor %}
-            </ul>
-            {#        <a href="{% url 'rango:show_categories'  %}">Show All Category</a>#}
-        {% else %}
-            <strong>Theres are no categories present.</strong>
-        {% endif %}
+    <div class="row marketing">
+        <div class="col-lg-6">
+            <h4>Most Liked Categories</h4>
+            <p>
+                {% if categories %}
+                    <ul>
+                        {% for category in categories %}
+                            <li>
+                                <a href="{% url 'rango:show_category' category.slug %}">{{ category.name }}</a><strong
+                                    color="aqua"> {{ category.views }}</strong></li>
+                        {% endfor %}
+                    </ul>
+                    {#        <a href="{% url 'rango:show_categories'  %}">Show All Category</a>#}
+                {% else %}
+                    <strong>Theres are no categories present.</strong>
+                {% endif %}
+            </p>
+        </div>
+        <div class="col-lg-6"><h4>Most Viewed Pages</h4></div>
+        <p>
+            {% if pages %}
+                <ul>
+                    {% for page in pages %}
+                        <li>
+                            <a href="{{ page.url }}">{{ page.title }}</a><strong
+                                color="aqua"> {{ page.views }}</strong>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <strong>Theres are no page present.</strong>
+            {% endif %}
+        </p>
     </div>
-    <div>
-        <div><h2>Most Viewed Pages</h2></div>
-        {% if pages %}
-            <ul>
-                {% for page in pages %}
-                    <li>
-                        <a href="{{ page.url }}">{{ page.title }}</a><strong color="aqua"> {{ page.views }}</strong>
-                    </li>
-                {% endfor %}
-            </ul>
-        {% else %}
-            <strong>Theres are no page present.</strong>
-        {% endif %}
     </div>
-
-    <div>
-        <a href="{% url 'rango:about' %}">About</a><br/>
-        <img src="{% static "images/rango.jpg" %}" alt="Picutre of Rango"/>
-    </div>
+    <img src="{% static "images/rango.jpg" %}" alt="Picutre of Rango"/>
 {% endblock %}
