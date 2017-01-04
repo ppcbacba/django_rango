@@ -38,7 +38,7 @@
                 <ul>
                     {% for page in pages %}
                         <li>
-                            <a href="{{ page.url }}">{{ page.title }}</a><strong
+                            <a href="{% url 'rango:goto' %}?page_id={{ page.id }}">{{ page.title }}</a><strong
                                 color="aqua"> {{ page.views }}</strong>
                         </li>
                     {% endfor %}

@@ -43,4 +43,15 @@ urlpatterns = [
     #     views.user_logout,
     #     name='logout'),
     # url(r'^logout/$', 'django.contrib.auth.views.logout', {'next_page': '/'}, name='logout'),
+    url(r'^goto/$',
+        views.track_url,
+        name='goto'),
+
+    url(r'^register_profile/$',
+        views.register_profile,
+        name='register_profile'),
+
+    url(r'^profile/(?P<username>[\w\-]+)/$',
+        views.profile,
+        name='profile'),
 ]

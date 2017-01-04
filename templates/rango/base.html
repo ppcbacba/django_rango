@@ -42,6 +42,8 @@
 
                 <a class="nav-item navbar-link" href="{% url 'rango:add_category' %}">Add a Category</a>
                 <a class="nav-item navbar-link" href="{% url 'auth_logout' %}">Logout</a>
+                <a class="nav-item navbar-link" href="{% url 'rango:profile' user.username %}">Profile</a>
+
             {% else %}
                 <a class="nav-item navbar-link" href="{% url 'registration_register' %}">Register Here</a>
                 <a class="nav-item navbar-link" href="{% url 'auth_login' %}">Login</a>
