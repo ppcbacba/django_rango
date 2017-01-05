@@ -57,9 +57,24 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
-            {% block  sidebar_block %}
-                {% get_category_list %}
-            {% endblock %}
+            <ul class="nav nav-list">
+                <li class="navbar-header">Type to find a category</li>
+                <form>
+                    <li>
+                        <input class="search-query form-control" type="text" name="suggestion" value=""
+                               id="suggestion"/>
+                    </li>
+                </form>
+            </ul>
+            <hr>
+            <div id="cats">
+{##对原作的修改，保留了以下的div,这样在开始的时候，就有一个列表，如果有输入，过滤列表，没有输入，则显示全部列表#}
+                <div id="cate">
+                    {% block  sidebar_block %}
+                        {% get_category_list %}
+                    {% endblock %}
+                </div>
+            </div>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             {% block body_block %} {% endblock %}
@@ -69,8 +84,10 @@
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-<script src="http://v4-alpha.getbootstrap.com/dist/js/bootstrap.min.js"></script>
+<script src="{% static "js/jquery.min.js" %}"></script>
+<script src="{% static "js/rango-jquery.js" %}"></script>
+<script src="{% static "js/rango-ajax.js" %}"></script>
+<script src="{% static "js/bootstrap.min.js" %}"></script>
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="http://v4-alpha.getbootstrap.com/assets/js/ie10-viewport-bug-workaround.js"></script>
 

@@ -20,6 +20,8 @@ class Category(models.Model):
     slug = models.SlugField(unique=True)
 
     def save(self, *args, **kwargs):
+        if self.views <= 0:
+            self.views=1
         self.slug = slugify(self.name)
         super(Category, self).save(*args, **kwargs)
 

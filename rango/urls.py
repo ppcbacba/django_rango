@@ -58,4 +58,11 @@ urlpatterns = [
     url(r'^profiles/$',
         views.list_profile,
         name='list_profile'),
+    url(r'^like/$',
+        views.like_category,
+        name='like_category'),
+    url(r'^suggest/$',
+        views.suggest_category,
+        name='suggest_category'),
+
 ]

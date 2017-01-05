@@ -171,3 +171,41 @@ def list_profile(request):
     userprofile_list = UserProfile.objects.all()
 
     return render(request, 'rango/list_profiles.html', {'userprofile_list': userprofile_list})
+
+
+@login_required
+def like_category(request):
+    cat_id = None
+    if request.method == 'GET':
+        cat_id = request.GET['category_id']
+        likes = 0
+        if cat_id:
+            cat = Category.objects.get(id=int(cat_id))
+            if cat:
+                likes = cat.likes + 1
+                cat.likes = likes
+                cat.save()
+        return HttpResponse(likes)
+
+
+def get_category_list(max_result=0, starts_with=''):
+    cat_list = []
+    if starts_with:
+        cat_list = Category.objects.filter(name__startswith=starts_with)
+    else:  # 对原作的修改，如果没有输入过滤条件，则返回全部类别
+        cat_list = Category.objects.all()
+    if max_result > 0:
+        if len(cat_list) > 0:
+            cat_list = cat_list[:max_result]
+    return cat_list
+
+
+def suggest_category(request):
+    # cat_list = []
+    starts_with = ''
+
+    if request.method == 'GET':
+        starts_with = request.GET['suggestion']
+    cat_list = get_category_list(8, starts_with)
+
+    return render(request, 'rango/cats.html', {'cats': cat_list})
