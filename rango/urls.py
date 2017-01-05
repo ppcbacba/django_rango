@@ -54,4 +54,8 @@ urlpatterns = [
     url(r'^profile/(?P<username>[\w\-]+)/$',
         views.profile,
         name='profile'),
+
+    url(r'^profiles/$',
+        views.list_profile,
+        name='list_profile'),
 ]
